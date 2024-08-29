@@ -11,11 +11,13 @@ export class AppComponent {
   public title: string = 'HOLA MUNDO';
   public counter: number = 10;
 
-  increaseBy():void{
-    this.counter += 1;
+  increaseBy(value: number):void{
+    this.counter += value;
   }
 
-  decreaseBy():void {
-    this.counter -= 1;
+  resetCounter(): void{
+    this.counter = 10
   }
+
+  
 }
