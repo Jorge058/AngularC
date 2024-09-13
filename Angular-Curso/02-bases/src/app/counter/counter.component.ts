@@ -4,7 +4,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: 'app-counter',
   template: `
-
+  
   <hr>
   <h3> {{counter}} </h3>
 
