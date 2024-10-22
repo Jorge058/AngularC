@@ -7,6 +7,8 @@
   </div>
 
   <div class="col">
-    <dbz-add-character></dbz-add-character>
-  </div>
+    <!-- Escribimos $event porque es la manera de que nuestro componente reciba un
+      una emision -->
+    <dbz-add-character (onNewCharacter)="onNewCharacter($event)"></dbz-add-character>
+  </div>|
 </div>

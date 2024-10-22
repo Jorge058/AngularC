@@ -18,4 +18,13 @@ export class MainPageComponent  {
     name: 'Vegeta',
     power: 7500
   }];
+
+  /* Creamos la funcion donde vamos a recibir el objeto
+  de padre a hijo */
+  onNewCharacter(character:Character):void{
+    console.log('MainPage');
+    console.log(character);
+
+
+  }
 }
