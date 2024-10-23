@@ -21,10 +21,8 @@ export class MainPageComponent  {
 
   /* Creamos la funcion donde vamos a recibir el objeto
   de padre a hijo */
+
   onNewCharacter(character:Character):void{
-    console.log('MainPage');
-    console.log(character);
-
-
+    this.characters.push(character);
   }
 }
