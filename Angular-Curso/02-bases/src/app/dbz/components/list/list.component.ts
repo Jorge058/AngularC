@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Character } from '../../interfaces/character.interface';
 
 @Component({
@@ -15,4 +15,13 @@ debemos de indicar con un decorador @input() */
     name: 'Trunks',
     power: 10
   }]
+
+  @Output()
+  public onDelete: EventEmitter<number> = new EventEmitter();
+
+  onDeleteCharacter(index:number):void{
+    //TODO: Emitir el indice del personje
+    this.onDelete.emit(index)
+  }
+
 }

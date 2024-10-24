@@ -3,12 +3,15 @@
 
 <div class="row">
   <div class="col">
-    <dbz-list [characterList] = "characters"></dbz-list>
+    <!-- ?Cambiamos la manera de jalar los datos ya que ahora se utiliza una
+     ? inyeccion, por lo que se convierte en un atributo -->
+    <dbz-list [characterList] = "dbzService.characters"
+      (onDelete)="dbzService.onDeleteCharacter($event)"></dbz-list>
   </div>
 
   <div class="col">
     <!-- Escribimos $event porque es la manera de que nuestro componente reciba un
       una emision -->
-    <dbz-add-character (onNewCharacter)="onNewCharacter($event)"></dbz-add-character>
+    <dbz-add-character (onNewCharacter)="dbzService.onNewCharacter($event)"></dbz-add-character>
   </div>|
 </div>

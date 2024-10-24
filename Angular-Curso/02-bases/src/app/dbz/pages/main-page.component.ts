@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Character } from '../interfaces/character.interface';
+import { DbzService } from '../services/dbz.service';
 
 @Component({
   selector: 'app-dbz-main-page',
@@ -7,22 +8,9 @@ import { Character } from '../interfaces/character.interface';
 })
 
 export class MainPageComponent  {
-
-  public characters: Character[] = [{
-    name:' Krilin',
-    power: 1000
-  },{
-    name:'Goku',
-    power: 9500
-  },{
-    name: 'Vegeta',
-    power: 7500
-  }];
-
-  /* Creamos la funcion donde vamos a recibir el objeto
-  de padre a hijo */
-
-  onNewCharacter(character:Character):void{
-    this.characters.push(character);
+//? Hacemos una injection para jalar el servicio de personajes y que no este
+//? al descubierto. Por lo que ahora es mas seguro. Y se convierte en una propiedad del servicio
+  constructor( public dbzService: DbzService ){
+    dbzService.characters
   }
 }

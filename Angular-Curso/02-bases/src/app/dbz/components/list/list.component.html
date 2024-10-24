@@ -7,7 +7,7 @@
       let isEven = even;
       let isOdd = odd;
       "
-        class="list-group-item"
+        class="list-group-item d-flex justify-content-between align-items-center"
         [ngClass]="{
           'list-group-item-dark': isLast,
           'list-group-item-primary': isEven
@@ -18,6 +18,8 @@
         <strong> Power: </strong>
         <span> {{character.power}} </span>
         <span>Es par: {{isEven}}</span>
+
+        <button class="btn btn-danger" (click)="onDeleteCharacter(i)">X</button>
       </li>
     </ul>
 
