@@ -6,7 +6,7 @@
     <!-- ?Cambiamos la manera de jalar los datos ya que ahora se utiliza una
      ? inyeccion, por lo que se convierte en un atributo -->
     <dbz-list [characterList] = "dbzService.characters"
-      (onDelete)="dbzService.onDeleteCharacter($event)"></dbz-list>
+      (onDelete)="dbzService.deleteCharacterById($event)"></dbz-list>
   </div>
 
   <div class="col">

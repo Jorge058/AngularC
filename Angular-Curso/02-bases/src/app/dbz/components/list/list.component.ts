@@ -17,11 +17,13 @@ debemos de indicar con un decorador @input() */
   }]
 
   @Output()
-  public onDelete: EventEmitter<number> = new EventEmitter();
+  public onDelete: EventEmitter<string> = new EventEmitter();
 
-  onDeleteCharacter(index:number):void{
-    //TODO: Emitir el indice del personje
-    this.onDelete.emit(index)
+  onDeleteCharacter(id?:string):void{
+    //TODO: Emitir el indice del personje}
+    if (!id) return;
+
+    this.onDelete.emit(id)
   }
 
 }
