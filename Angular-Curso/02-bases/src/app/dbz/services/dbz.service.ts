@@ -36,7 +36,7 @@ export class DbzService {
   ? de padre a hijo
   */
 
-  onNewCharacter(character:Character):void{
+  addCharater(character:Character):void{
     /*
     ? Utilizamos el spreed para que se genere un id en los nuevos objetos
     */
