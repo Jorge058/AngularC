@@ -1,0 +1,25 @@
+//*Como bien sabemos github necesita leer una carpeta llamada docs para poder subir
+paginas
+Lo primero que debemos hacer es cambiar la ruta de href de / a */ para que 
+el navegador pueda utilizar los recursos de los archivos generados en produccion
+Para ello cambiamos en el script de json
+"build:href": "ng build --base-href ./"
+
+Luego necesitamos borrar la carpeta docs anterior para que se cree una nueva
+
+1- Instalamos una libreria para eliminar carpetas con
+npm install del-cli --save-dev
+2-Agregamos el script al json 
+"delete:docs": "del docs"
+
+Luego necesitamos pasar los nuevos archivos de la carpeta dist 
+a una nueva carpeta docs para que sea la nueva produccion
+
+1-Instalamos el npm: npm i copyfiles --save-dev
+2-Agregamos el script 
+"copy:dist": "copyfiles dist/bases/* ./docs -f"
+
+Para finalizar automatizamos todos los scripts en un solo comando 
+para que se haga todo el build y la eliminacion y creacion de carpetas
+
+"build:github": "npm run delete:docs && npm run build:href && npm run copy:dist"
