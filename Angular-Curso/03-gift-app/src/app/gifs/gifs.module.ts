@@ -13,10 +13,12 @@ import { CardListComponent } from './Components/card-list/card-list.component';
     CardListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
   ],
   exports:[
     HomePageComponent
+
   ]
 })
 export class GifsModule {}
