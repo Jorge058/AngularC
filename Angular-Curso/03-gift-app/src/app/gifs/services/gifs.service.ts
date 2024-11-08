@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SearchResponse,Gif } from '../interfaces/gifs.interfaces';
 
 /*
   ? El provideIn permite usar el servicio en toda la aplicacion.
@@ -8,6 +9,8 @@ import { Injectable } from '@angular/core';
 */
 @Injectable({providedIn: 'root'})
 export class GifsService {
+
+  public gifList: Gif[] = [];
 
   private _tagsHistory: string[] = [];
   private apiKey = 'pACkLqaDHy0gPYQL6RHyGfxjgX1KnoDV';
@@ -39,9 +42,15 @@ export class GifsService {
         .set('limit','10')
         .set('q',tag)
 
-    this.http.get(`${ this.serviceUrl }/search`, {params})
+/*
+* Esperamos la respuesta  y la espuesta obtenida la mandamos a nuestro searchList
+* el cual es una interfaz de tipo SearchResponse. Es decir, que contiene los elementos esperados por nuestra peticion
+
+*/
+    this.http.get<SearchResponse>(`${ this.serviceUrl }/search`, {params})
     .subscribe(resp => {
-    console.log(resp);
+      this.gifList = resp.data;
+      console.log({gifs: this.gifList});
     });
   }
 }
