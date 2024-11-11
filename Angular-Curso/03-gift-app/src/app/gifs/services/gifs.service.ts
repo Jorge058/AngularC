@@ -31,6 +31,20 @@ export class GifsService {
 
     this._tagsHistory.unshift(tag);
     this._tagsHistory = this.tagsHistory.splice(0,10);
+
+    this.saveLocalStorage();
+  }
+
+  /*
+    *Guardamos en el navegador los datos del historial de gifs para
+    *hacer una consistencia de datos
+  */
+  private saveLocalStorage(){
+    localStorage.setItem('history',JSON.stringify(this._tagsHistory))
+  }
+
+  private loadLocalStorage(){
+    const temporal = 
   }
 
   searchTag(tag:string):void{
