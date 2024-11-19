@@ -11,10 +11,10 @@ import { ContactPageComponent } from './shared/pages/contact-page/contact-page.c
   ?Si el path es home entonces va a utilizar el componente home
 */
 const routes:Routes = [
-  {
+  /* {
     path: 'home',
     component: HomePageComponent
-  },
+  }, */
   {
     path: 'about',
     component: AboutPageComponent
@@ -24,10 +24,19 @@ const routes:Routes = [
     component: ContactPageComponent
   },
   {
+    path: 'countries',
+    loadChildren: () => import('./countries/countries.module').then(m =>m.CountriesModule)
+  },
+  {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'countries'
   }
 ]
+/*
+  ?Para cargar el modulo de las rutas hijas necesitamos el comando loadchildren y indicamos el path de la ruta
+  ?de esta manera se esta cargando perezozamente.
+*/
+
 /*
   ?En este caso se esta utilizando el routing inicial por lo que usamos forRoot, si fuera
   ? un routing diferente entonces usariamos el forchild.
