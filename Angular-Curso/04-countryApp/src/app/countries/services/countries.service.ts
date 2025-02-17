@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, delay, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Country } from '../interfaces/country';
 import { CacheStore } from '../interfaces/cache-store.interface';
 
@@ -27,16 +27,23 @@ export class CountriesService {
 
   /*
   ?Debemos especificarle a typescript el tipo de datos que se va a recibir en el observable
-  ?para ello ponemos <Country[]> */
+  ?para ello ponemos <Country[]>
+  */
 
   /*
     *A nuestra peticion le ponemos un pipe catcherror para cuando se busque algo que no esta y no regrese un error
     *le adjuntamos un of para meterle un arreglo vacio
   */
-
+  /*
+    ?Para recuperar la data le ponemos un tap al pipe, esto con la finalidad de obtener los datos
+    ?pero sin alterar los datos obtenidos
+  */
   searchCapital(term:string):Observable<Country[]>{
     const url = `${this.apiUrl}/capital/${term}`;
-    return this.getCountriesRequest(url);
+    return this.getCountriesRequest(url)
+        .pipe(
+          tap(countries => this.cacheStorage.byCapital = {term, countries})
+        );
   }
 
   searchCountry(term:string):Observable<Country[]>{
