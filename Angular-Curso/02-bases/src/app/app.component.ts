@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
-
-/*El componente que nos sirve para trabajar el html */
 export class AppComponent {
-  public title: string = 'HOLA MUNDO';
+  title = '02-bases';
 }
