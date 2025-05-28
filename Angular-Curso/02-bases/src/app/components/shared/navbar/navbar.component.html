@@ -1,4 +1,32 @@
+<style>
+  nav{
+    display: flex;
+    justify-content: space-around;
+    background-color: #212121;
+    color: white;
+    padding: 10px;
+  }
+  nav a{
+    color: white;
+    text-decoration: none;
+  }
+
+  nav a.active{
+    color: aqua;
+  }
+</style>
+<!-- ? -Roterlink sirve para redirigir a paginas especificas
+    ? -Al tener valores en los [] significa que se le esta asignando el valor a una
+    variable.
+    ? -Le asignamos un routerlinkoption para especificar que realmente se esta en la ruta especificada.
+-->
+
 <nav>
-  <a href="">Contador</a>
-  <a href="">Hero</a>
+  <a routerLink="/"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{exact:true}"
+  >Contador</a>
+  <a routerLink="/hero" [routerLinkActive]="'active'">Hero</a>
+  <a routerLink="/dragonball" [routerLinkActive]="'active'">DragonBall</a>
+
 </nav>
