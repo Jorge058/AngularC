@@ -1,5 +1,5 @@
-import { NgClass } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { CharacterListComponent } from "../../components/dragonball/character-list/character-list.component";
 
 interface Character{
   id:number,
@@ -8,22 +8,19 @@ interface Character{
 }
 
 @Component({
-  imports: [
-    //NgClass
-  ],
-  templateUrl: './dragonball-page.component.html'
+  templateUrl: './dragonball-super-page.component.html',
+  selector: 'dragonball-super',
+  imports: [CharacterListComponent],
 })
 
 
-export class DragonballPageComponent {
+export class DragonballSuperPageComponent {
   name = signal('');
   power = signal(0);
 
   characters = signal<Character[]>([
     {id: 1, name:'Goku', power:9001},
-    /* {id: 2, name:'Vegeta', power:9000},
-    {id: 3, name:'Piccolo', power:7000},
-    {id: 4, name:'Yamcha', power:500} */
+    {id: 2, name:'Vegeta', power:9000},
   ]);
 
   addCharacter(){
@@ -48,12 +45,5 @@ export class DragonballPageComponent {
     this.name.set('');
     this.power.set(0);
   }
-
-  /* powerClasses = computed(()=> {
-    return {
-      'text-danger': true,
-      }
-  }) */
-
 }
 
