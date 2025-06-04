@@ -8,13 +8,13 @@
       debido a que el evento lo debemos pasar al componente general, se agrega el metodo
       al que se va a enviar. En este caso el addCharacter -->
     <dragonball-character-add
-    (newCharacter)="addCharacter($event)"
+    (newCharacter)="dragonballService.addCharacter($event)"
     />
   </div>
 
   <div class="col-12 col-sm-6">
     <dragonball-character-list
     listName="Listado de Personajes"
-    [characters]="characters()"/>
+    [characters]="dragonballService.characters()"/>
   </div>
 </section>
