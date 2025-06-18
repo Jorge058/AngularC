@@ -7,4 +7,9 @@ import { SearchInputComponent } from "../../components/search-input/search-input
   imports: [CountryListComponent, SearchInputComponent],
   templateUrl: './by-country-page.component.html',
 })
-export class ByCountryPageComponent { }
+export class ByCountryPageComponent {
+  
+countries(): import("../../interfaces/res-countries.interfaces").RESTCountry[] {
+throw new Error('Method not implemented.');
+}
+}
