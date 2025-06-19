@@ -8,7 +8,6 @@
         <th>Nombre</th>
         <th>Capital</th>
         <th>Población</th>
-        <th>Detalles</th>
       </tr>
     </thead>
     <tbody>
@@ -19,14 +18,14 @@
       <td>{{ country.flag }}</td>
       <td>
         <img
-          [src]="country.flags.svg"
-          [alt]="country.name.common"
+          [src]="country.flagSvg"
+          [alt]="country.name"
           class="w-10"
         />
       </td>
-      <td>{{ country.name.common }}</td>
+      <td>{{ country.name }}</td>
       <td>{{ country.capital }}</td>
-      <td>{{ country.population }}</td>
+      <td><span class="badge badge-secondary">{{ country.population | number }}</span></td>
       <td><a class="link-primary cursor-pointer">Más información</a></td>
     </tr>
       }
