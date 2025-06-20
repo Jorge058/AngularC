@@ -1,9 +1,10 @@
-import { Component, inject, resource, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { firstValueFrom, of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+
 import { SearchInputComponent } from '../../components/search-input/search-input.component';
 import { CountryListComponent } from '../../components/country-list/country-list.component';
 import { CountryService } from '../../services/country.service';
-import { Country } from '../../interfaces/country.interface';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-by-capital-page',
@@ -13,22 +14,41 @@ import { firstValueFrom } from 'rxjs';
 export class ByCapitalPageComponent {
   countryService = inject(CountryService);
   query = signal('');
+
+/*
+?La tercera forma para trabajar es con un RxResource,
+?es lo mismo que el resource normal pero este trabaja
+?con observable, no con async */
+
+countryResource = rxResource({
+    request: () => ({query: this.query()}),
+    loader: ({request}) => {
+
+      /* Comprobamos que retorne un observable de acuerdo al tipo de dato que enviamos  */
+      if (!this.query) return of ([])
+      return this.countryService.searchByCapital(request.query)
+
+    },
+  })
+
 /*
 ? Utilizamos un Resource para obtener una respuesta y un loader, el cual
 ?se va a encargar de hacer la peticion al servicio y evitamos hacer codigo
 ?tradicional
  */
-  countryResource = resource({
+  /* countryResource = resource({
     request: () => ({query: this.query()}),
     loader: async({request}) => {
-      if (!this.query()) return []
-      
+      if (!this.query) return []
+
       /* First value permite transformar cualquier obserbable en promesas */
-      return await firstValueFrom(
+      /* return await firstValueFrom(
         this.countryService.searchByCapital(request.query)
       )
     }
   })
+ */
+
 
   /* Forma traicional para manejar la respuesta
 

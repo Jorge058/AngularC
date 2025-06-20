@@ -17,18 +17,32 @@ export class CountryService {
   searchByCapital(query: string): Observable<Country[]> {
     query = query.toLowerCase();
 
-    return this.http
-      .get<RESTCountry[]>(`${API_URL}/capital/${query}`)
-      .pipe(
-        map((resp) =>
-          CountryMapper.mapRestCountryArrayToCountryArray(resp)),
-        catchError((error) => {
-          console.log('Error fetching ', error);
+    return this.http.get<RESTCountry[]>(`${API_URL}/capital/${query}`).pipe(
+      map((resp) => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+      catchError((error) => {
+        console.log('Error fetching ', error);
 
-          return throwError(
-            ()=> new Error(`No se pudo obtener la busqueda: ${query}`)
-          )
-        })
-      );
+        return throwError(
+          () => new Error(`No se pudo obtener la busqueda: ${query}`)
+        );
+      })
+    );
   }
+
+  searchByCountry(query: string) {
+    const url = `${API_URL}/name/${query}`;
+    query = query.toLowerCase();
+
+    return this.http.get<RESTCountry[]>(url).pipe(
+      map((resp) => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+      catchError((error) => {
+        console.log('Error fetching', error);
+
+        return throwError(
+          () => new Error(`No se pudo obtener la busqueda: ${query}`)
+        );
+      })
+    );
+  }
+  
 }

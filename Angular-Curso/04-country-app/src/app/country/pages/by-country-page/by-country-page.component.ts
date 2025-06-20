@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { CountryListComponent } from "../../components/country-list/country-list.component";
-import { SearchInputComponent } from "../../components/search-input/search-input.component";
+import { Component, inject, resource, signal } from '@angular/core';
+import { CountryListComponent } from '../../components/country-list/country-list.component';
+import { SearchInputComponent } from '../../components/search-input/search-input.component';
+import { CountryService } from '../../services/country.service';
+import { firstValueFrom, of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'by-country-page',
@@ -8,8 +11,17 @@ import { SearchInputComponent } from "../../components/search-input/search-input
   templateUrl: './by-country-page.component.html',
 })
 export class ByCountryPageComponent {
-  
-countries(): import("../../interfaces/res-countries.interfaces").RESTCountry[] {
-throw new Error('Method not implemented.');
-}
+  countryService = inject(CountryService);
+  query = signal('');
+
+  countryResource = rxResource({
+    request: () => ({query: this.query()}),
+    loader: ({request}) => {
+
+      /* Comprobamos que retorne un observable de acuerdo al tipo de dato que enviamos  */
+      if (!this.query) return of ([])
+      return this.countryService.searchByCountry(request.query)
+
+    },
+  })
 }
