@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { firstValueFrom, of } from 'rxjs';
+import { of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 import { SearchInputComponent } from '../../components/search-input/search-input.component';
