@@ -23,5 +23,5 @@ export class ByCountryPageComponent {
       return this.countryService.searchByCountry(request.query)
 
     },
-  })
+  });
 }
