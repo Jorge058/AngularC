@@ -5,6 +5,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { SearchInputComponent } from '../../components/search-input/search-input.component';
 import { CountryListComponent } from '../../components/country-list/country-list.component';
 import { CountryService } from '../../services/country.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-by-capital-page',
@@ -12,9 +13,15 @@ import { CountryService } from '../../services/country.service';
   templateUrl: './by-capital-page.component.html',
 })
 export class ByCapitalPageComponent {
-  countryService = inject(CountryService);
-  query = signal('');
 
+  countryService = inject(CountryService);
+
+  activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
+
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
+
+  query = signal(this.queryParam);
 /*
 ?La tercera forma para trabajar es con un RxResource,
 ?es lo mismo que el resource normal pero este trabaja
@@ -25,9 +32,20 @@ countryResource = rxResource({
     loader: ({request}) => {
 
       /* Comprobamos que retorne un observable de acuerdo al tipo de dato que enviamos  */
-      if (!this.query) return of ([])
-      return this.countryService.searchByCapital(request.query)
+      if (!request.query) return of ([]);
+      /*
+      ?Ademas, para navegar a rutas que queremos crear dependiendo la busqueda, podemos
+      ?agregar al navigate, extras, por ejemplo aqui solo agregaremos uno que sea el
+      ?query que buscamos
+      */
+      this.router.navigate(['/country/by-capital'],{
+        queryParams: {
+          query: request.query
+        }
+      })
 
+
+      return this.countryService.searchByCapital(request.query);
     },
   })
 

@@ -50,8 +50,8 @@ export class CountryService {
 
     return this.http.get<RESTCountry[]>(url).pipe(
       map((resp) => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
-      tap(countries => this.queryCacheCapital.set(query,countries)),
-      delay(3000),
+      tap(countries => this.queryCacheCountry.set(query,countries)),
+      delay(2000),
       catchError((error) => {
         console.log('Error fetching', error);
 
@@ -81,13 +81,13 @@ export class CountryService {
   searchByRegion(region: Region) {
     const url = `${API_URL}/region/${region}`;
 
-    if(this.queryCacheCountry.has(region)){
-      return of(this.queryCacheCountry.get(region) ?? []);
+    if(this.queryCacheRegion.has(region)){
+      return of(this.queryCacheRegion.get(region) ?? []);
     }
 
     return this.http.get<RESTCountry[]>(url).pipe(
       map((resp) => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
-      tap(countries => this.queryCacheCapital.set(region,countries)),
+      tap(countries => this.queryCacheRegion.set(region,countries)),
       catchError((error) => {
         console.log('Error fetching', error);
 
@@ -97,5 +97,4 @@ export class CountryService {
       })
     );
   }
-
 }
